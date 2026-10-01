@@ -1,0 +1,2048 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    /* MAIN GAME COLORS */
+    --pink: #ff5fa2;
+    --hot-pink: #ff3d8d;
+    --deep-pink: #e91e73;
+    --light-pink: #ffb6d8;
+    --soft-pink: #ffd6e8;
+    --pale-pink: #fff0f7;
+
+    /* ACCENT COLORS */
+    --orange: #ff914d;
+    --yellow: #ffd166;
+
+    --blue: #4da6ff;
+    --light-blue: #91d7ff;
+    --deep-blue: #4361ee;
+
+    /* PURPLE IS NOW ONLY A SMALL ACCENT */
+    --purple: #b875d1;
+    --dark-purple: #9a4f9f;
+
+    --cream: #fff4dc;
+    --dark: #241b35;
+
+    --grass: #5ecb7d;
+    --dark-grass: #358a55;
+
+    --pixel-shadow: 7px 7px 0 rgba(36, 27, 53, 0.28);
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: var(--hot-pink);
+    color: var(--dark);
+    font-family: 'VT323', monospace;
+    overflow-x: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+#game {
+    min-height: 100svh;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ff7fb5 0%,
+            #ff9fc7 30%,
+            #ffb6d8 52%,
+            #ffd1e5 67%,
+            #62c67a 69%,
+            #4da965 100%
+        );
+}
+
+/* =========================
+   SKY
+========================= */
+
+.sky {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 70%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.pixel-sun {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--yellow);
+    top: 9%;
+    right: 12%;
+
+    box-shadow:
+        8px 0 var(--yellow),
+        -8px 0 var(--yellow),
+        0 8px var(--yellow),
+        0 -8px var(--yellow);
+}
+
+.cloud {
+    position: absolute;
+    width: 75px;
+    height: 24px;
+    background: white;
+    opacity: 0.75;
+
+    box-shadow:
+        18px -12px white,
+        40px -5px white,
+        55px 3px white;
+}
+
+.cloud-one {
+    top: 18%;
+    left: 8%;
+    animation: cloudMove 18s linear infinite;
+}
+
+.cloud-two {
+    top: 30%;
+    right: 18%;
+    transform: scale(0.7);
+    animation: cloudMove 24s linear infinite reverse;
+}
+
+@keyframes cloudMove {
+    0% {
+        transform: translateX(-30px);
+    }
+
+    50% {
+        transform: translateX(35px);
+    }
+
+    100% {
+        transform: translateX(-30px);
+    }
+}
+
+/* =========================
+   STARS
+========================= */
+
+.stars span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    opacity: 0.65;
+    animation: twinkle 2s steps(2) infinite;
+}
+
+.stars span:nth-child(1) {
+    top: 10%;
+    left: 30%;
+}
+
+.stars span:nth-child(2) {
+    top: 17%;
+    left: 62%;
+}
+
+.stars span:nth-child(3) {
+    top: 28%;
+    left: 43%;
+}
+
+.stars span:nth-child(4) {
+    top: 8%;
+    left: 77%;
+}
+
+.stars span:nth-child(5) {
+    top: 37%;
+    left: 18%;
+}
+
+.stars span:nth-child(6) {
+    top: 14%;
+    left: 88%;
+}
+
+.stars span:nth-child(7) {
+    top: 42%;
+    left: 72%;
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* =========================
+   MOUNTAINS
+========================= */
+
+.mountains {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 52%;
+    height: 180px;
+    pointer-events: none;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+
+    border-bottom: 180px solid rgba(190, 91, 145, 0.30);
+}
+
+.mountain-one {
+    left: -50px;
+}
+
+.mountain-two {
+    left: 25%;
+    border-bottom-color: rgba(221, 105, 164, 0.30);
+}
+
+.mountain-three {
+    right: -70px;
+    border-bottom-color: rgba(190, 91, 145, 0.30);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.game-header {
+    position: relative;
+    z-index: 20;
+    width: min(900px, calc(100% - 28px));
+    margin: 18px auto 0;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.game-title {
+    display: flex;
+    flex-direction: column;
+    text-shadow: 3px 3px 0 var(--deep-pink);
+}
+
+.title-small {
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.title-main {
+    color: #fff0f7;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(20px, 5vw, 34px);
+    margin-top: 7px;
+}
+
+.level-box {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    background: var(--hot-pink);
+    color: white;
+
+    border: 4px solid var(--dark);
+
+    padding: 8px 10px;
+
+    box-shadow: var(--pixel-shadow);
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+}
+
+.level-box strong {
+    color: var(--yellow);
+}
+
+/* =========================
+   HUD
+========================= */
+
+.hud {
+    margin-top: 14px;
+
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 10px;
+}
+
+.hud-block {
+    background: rgba(255, 244, 220, 0.95);
+    border: 4px solid var(--dark);
+    padding: 7px;
+
+    box-shadow: 4px 4px 0 rgba(36, 27, 53, 0.25);
+}
+
+.hud-label {
+    display: block;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+
+    margin-bottom: 6px;
+}
+
+.heart-meter,
+.quest-progress {
+    height: 13px;
+
+    border: 3px solid var(--dark);
+    background: #302640;
+
+    overflow: hidden;
+}
+
+.heart-meter div {
+    width: 25%;
+    height: 100%;
+
+    background: linear-gradient(
+        to right,
+        var(--light-pink),
+        var(--hot-pink),
+        var(--deep-pink)
+    );
+
+    transition: width 0.5s steps(5);
+}
+
+.quest-progress {
+    display: inline-block;
+    width: calc(100% - 45px);
+    vertical-align: middle;
+}
+
+.quest-progress div {
+    height: 100%;
+    width: 0%;
+
+    background: linear-gradient(
+        to right,
+        var(--pink),
+        var(--hot-pink)
+    );
+
+    transition: width 0.45s steps(6);
+}
+
+#questText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    margin-left: 5px;
+}
+
+/* =========================
+   MAIN WORLD
+========================= */
+
+.game-world {
+    position: relative;
+    z-index: 10;
+
+    width: min(900px, calc(100% - 28px));
+
+    margin: 16px auto 0;
+}
+
+.pixel-message {
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 0 auto 8px;
+    padding: 7px 10px;
+
+    background: var(--hot-pink);
+    color: white;
+
+    border: 3px solid var(--dark);
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+
+    text-align: center;
+
+    box-shadow: 4px 4px 0 rgba(36, 27, 53, 0.25);
+
+    animation: messagePulse 2s steps(2) infinite;
+}
+
+@keyframes messagePulse {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+/* =========================
+   CHARACTER AREA
+========================= */
+
+.character-area {
+    position: relative;
+
+    height: 280px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.character-shadow {
+    position: absolute;
+
+    bottom: 18px;
+
+    width: 120px;
+    height: 18px;
+
+    background: rgba(36, 27, 53, 0.25);
+
+    box-shadow: 8px 4px 0 rgba(36, 27, 53, 0.1);
+}
+
+/* =========================
+   PIXEL PUPPY
+========================= */
+
+.puppy {
+    position: relative;
+
+    width: 170px;
+    height: 210px;
+
+    image-rendering: pixelated;
+
+    animation: puppyIdle 1.7s steps(3) infinite;
+
+    z-index: 4;
+}
+
+.puppy.happy {
+    animation:
+        puppyJump 0.7s steps(5),
+        puppyIdle 1.7s steps(3) 0.7s infinite;
+}
+
+.puppy.walk {
+    animation:
+        puppyWalk 0.9s steps(6) infinite;
+}
+
+@keyframes puppyIdle {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes puppyJump {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-22px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes puppyWalk {
+    0% {
+        transform: translateX(-7px) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateX(7px) rotate(2deg);
+    }
+
+    100% {
+        transform: translateX(-7px) rotate(-2deg);
+    }
+}
+
+.body {
+    position: absolute;
+
+    width: 100px;
+    height: 82px;
+
+    left: 40px;
+    bottom: 27px;
+
+    background: #f7a96b;
+
+    border: 6px solid var(--dark);
+
+    box-shadow:
+        inset 10px 0 #ffbd7c,
+        inset -8px 0 #d87952;
+}
+
+.leg {
+    position: absolute;
+
+    width: 25px;
+    height: 45px;
+
+    bottom: -35px;
+
+    background: #f7a96b;
+
+    border: 5px solid var(--dark);
+}
+
+.leg-back {
+    left: 10px;
+}
+
+.leg-front {
+    right: 10px;
+}
+
+.head {
+    position: absolute;
+
+    width: 122px;
+    height: 105px;
+
+    left: 24px;
+    top: 18px;
+
+    background: #f7a96b;
+
+    border: 6px solid var(--dark);
+
+    box-shadow:
+        inset 8px 0 #ffbd7c,
+        inset -8px 0 #d87952;
+}
+
+.ear {
+    position: absolute;
+
+    width: 38px;
+    height: 62px;
+
+    top: -23px;
+
+    background: #c96751;
+
+    border: 6px solid var(--dark);
+}
+
+.ear-left {
+    left: -14px;
+    transform: rotate(-15deg);
+}
+
+.ear-right {
+    right: -14px;
+    transform: rotate(15deg);
+}
+
+.puppy.happy .ear-left {
+    animation: earLeft 0.5s steps(3) 3;
+}
+
+.puppy.happy .ear-right {
+    animation: earRight 0.5s steps(3) 3;
+}
+
+@keyframes earLeft {
+    50% {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes earRight {
+    50% {
+        transform: rotate(30deg);
+    }
+}
+
+/* =========================
+   PINK PUPPY COLLAR
+========================= */
+
+.collar {
+    position: absolute;
+
+    width: 82px;
+    height: 16px;
+
+    left: 50%;
+    top: 103px;
+
+    transform: translateX(-50%);
+
+    background: var(--hot-pink);
+
+    border: 5px solid var(--dark);
+
+    box-shadow:
+        0 4px 0 var(--deep-pink);
+
+    z-index: 7;
+}
+
+.collar::before,
+.collar::after {
+    content: "";
+
+    position: absolute;
+
+    top: 2px;
+
+    width: 8px;
+    height: 6px;
+
+    background: var(--light-pink);
+}
+
+.collar::before {
+    left: 8px;
+}
+
+.collar::after {
+    right: 8px;
+}
+
+.collar-tag {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 50%;
+    top: 8px;
+
+    transform: translateX(-50%);
+
+    background: var(--yellow);
+
+    border: 4px solid var(--dark);
+
+    z-index: 10;
+}
+
+.collar-tag::after {
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #fff4dc;
+}
+
+/* =========================
+   FACE
+========================= */
+
+.face {
+    position: absolute;
+    inset: 25px 12px 10px;
+}
+
+.eye {
+    position: absolute;
+
+    top: 7px;
+
+    width: 13px;
+    height: 17px;
+
+    background: var(--dark);
+}
+
+.eye-left {
+    left: 15px;
+}
+
+.eye-right {
+    right: 15px;
+}
+
+.eye span {
+    display: block;
+
+    width: 4px;
+    height: 4px;
+
+    margin: 3px;
+
+    background: white;
+}
+
+.puppy.blink .eye {
+    height: 4px;
+    top: 13px;
+}
+
+.snout {
+    position: absolute;
+
+    width: 58px;
+    height: 36px;
+
+    left: 50%;
+    bottom: 3px;
+
+    transform: translateX(-50%);
+
+    background: #ffd09a;
+
+    border: 5px solid var(--dark);
+}
+
+.nose {
+    position: absolute;
+
+    width: 18px;
+    height: 12px;
+
+    left: 50%;
+    bottom: 22px;
+
+    transform: translateX(-50%);
+
+    background: var(--dark);
+}
+
+.mouth {
+    position: absolute;
+
+    width: 20px;
+    height: 8px;
+
+    left: 50%;
+    bottom: 8px;
+
+    transform: translateX(-50%);
+
+    border-bottom: 4px solid var(--dark);
+}
+
+.tail {
+    position: absolute;
+
+    width: 40px;
+    height: 28px;
+
+    right: 0;
+    bottom: 78px;
+
+    border: 7px solid var(--dark);
+    border-left: 0;
+
+    border-radius: 0 20px 20px 0;
+
+    background: #f7a96b;
+
+    transform-origin: left center;
+}
+
+.puppy.happy .tail {
+    animation: tailWag 0.18s steps(2) infinite;
+}
+
+@keyframes tailWag {
+    0% {
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform: rotate(30deg);
+    }
+}
+
+/* =========================
+   SPEECH
+========================= */
+
+.speech-box {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 14px;
+    left: 50%;
+
+    transform: translateX(60px);
+
+    width: min(330px, 70%);
+
+    background: var(--pale-pink);
+
+    border: 5px solid var(--dark);
+
+    padding: 12px;
+
+    box-shadow: var(--pixel-shadow);
+}
+
+.speech-name {
+    display: inline-block;
+
+    background: var(--hot-pink);
+    color: white;
+
+    border: 3px solid var(--dark);
+
+    padding: 4px 6px;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+
+    margin-bottom: 7px;
+}
+
+.speech-box p {
+    font-size: 21px;
+    line-height: 0.95;
+}
+
+.speech-arrow {
+    position: absolute;
+
+    left: 28px;
+    bottom: -18px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 18px solid var(--dark);
+}
+
+.speech-arrow::after {
+    content: "";
+
+    position: absolute;
+
+    left: -6px;
+    top: -17px;
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid var(--pale-pink);
+}
+
+/* =========================
+   GROUND
+========================= */
+
+.ground {
+    position: relative;
+
+    height: 145px;
+
+    margin-top: -8px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #63d47f 0,
+            #63d47f 14px,
+            #4fae68 14px,
+            #4fae68 100%
+        );
+
+    border-top: 6px solid var(--dark-grass);
+
+    overflow: hidden;
+}
+
+.grass-layer {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 12px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #83e694 0 8px,
+            #63d47f 8px 16px
+        );
+}
+
+.flower-field {
+    position: absolute;
+    inset: 20px 0 0;
+}
+
+.pixel-flower {
+    position: absolute;
+
+    bottom: 20px;
+
+    width: 24px;
+    height: 50px;
+
+    animation: flowerGrow 0.7s steps(4) forwards;
+
+    transform-origin: bottom;
+}
+
+.pixel-flower .stem {
+    position: absolute;
+
+    bottom: 0;
+    left: 10px;
+
+    width: 5px;
+    height: 30px;
+
+    background: #277d48;
+}
+
+.pixel-flower .petal {
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    background: var(--pink);
+
+    border: 3px solid var(--dark);
+}
+
+.pixel-flower .p1 {
+    top: 0;
+    left: 5px;
+}
+
+.pixel-flower .p2 {
+    top: 8px;
+    left: -2px;
+}
+
+.pixel-flower .p3 {
+    top: 8px;
+    right: -2px;
+}
+
+.pixel-flower .p4 {
+    top: 15px;
+    left: 5px;
+}
+
+.pixel-flower .center {
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    top: 9px;
+    left: 8px;
+
+    background: var(--yellow);
+
+    border: 2px solid var(--dark);
+
+    z-index: 2;
+}
+
+@keyframes flowerGrow {
+    0% {
+        transform: scaleY(0);
+    }
+
+    60% {
+        transform: scaleY(1.15);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.rocks span {
+    position: absolute;
+
+    width: 25px;
+    height: 15px;
+
+    background: #81758c;
+
+    border: 4px solid var(--dark);
+
+    bottom: 22px;
+}
+
+.rocks span:nth-child(1) {
+    left: 8%;
+}
+
+.rocks span:nth-child(2) {
+    right: 12%;
+    width: 35px;
+}
+
+.rocks span:nth-child(3) {
+    left: 46%;
+    bottom: 30px;
+    transform: scale(0.7);
+}
+
+.ground-decoration {
+    position: absolute;
+
+    width: 7px;
+    height: 18px;
+
+    background: #3b9654;
+
+    bottom: 20px;
+}
+
+.decoration-one {
+    left: 25%;
+    transform: rotate(-20deg);
+}
+
+.decoration-two {
+    right: 30%;
+    transform: rotate(20deg);
+}
+
+/* =========================
+   CONTROL PANEL
+========================= */
+
+.control-panel {
+    position: relative;
+
+    z-index: 15;
+
+    margin-top: 12px;
+}
+
+.quest-card {
+    background: var(--cream);
+
+    border: 5px solid var(--dark);
+
+    box-shadow: var(--pixel-shadow);
+
+    padding: 12px;
+}
+
+.quest-card-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quest-tag {
+    background: var(--hot-pink);
+    color: white;
+
+    border: 3px solid var(--dark);
+
+    padding: 4px 6px;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+}
+
+#questNumber {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+
+    color: var(--deep-pink);
+}
+
+.quest-card h2 {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: clamp(12px, 3vw, 17px);
+
+    margin: 11px 0 6px;
+
+    color: var(--deep-pink);
+}
+
+.quest-card p {
+    font-size: 20px;
+    line-height: 0.95;
+}
+
+.pixel-button {
+    width: 100%;
+
+    margin-top: 13px;
+
+    min-height: 58px;
+
+    border: 5px solid var(--dark);
+
+    background: var(--hot-pink);
+    color: white;
+
+    box-shadow:
+        0 7px 0 var(--deep-pink),
+        7px 7px 0 rgba(36, 27, 53, 0.2);
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: clamp(9px, 2.5vw, 13px);
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition:
+        transform 0.08s,
+        box-shadow 0.08s;
+}
+
+.pixel-button:hover {
+    background: var(--pink);
+}
+
+.pixel-button:active {
+    transform: translate(5px, 5px);
+
+    box-shadow:
+        0 2px 0 var(--deep-pink);
+}
+
+.button-icon {
+    display: inline-block;
+
+    width: 12px;
+    height: 12px;
+
+    background: var(--light-pink);
+
+    border: 3px solid var(--dark);
+
+    margin-right: 8px;
+
+    vertical-align: middle;
+}
+
+.tiny-status {
+    text-align: center;
+
+    margin-top: 10px;
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 6px;
+
+    color: white;
+
+    text-shadow: 2px 2px 0 var(--deep-pink);
+}
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen {
+    position: fixed;
+
+    z-index: 100;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            rgba(255, 61, 141, 0.94),
+            rgba(233, 30, 115, 0.94)
+        );
+}
+
+.screen.active {
+    display: flex;
+
+    animation: screenAppear 0.5s steps(4);
+}
+
+@keyframes screenAppear {
+    from {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   COMPLETION
+========================= */
+
+.completion-window,
+.love-window {
+    width: min(650px, 100%);
+
+    max-height: 92svh;
+
+    overflow-y: auto;
+
+    background: var(--cream);
+
+    border: 6px solid var(--dark);
+
+    box-shadow:
+        12px 12px 0 rgba(36, 27, 53, 0.3),
+        inset 0 0 0 4px var(--light-pink);
+}
+
+.window-bar {
+    height: 38px;
+
+    background: var(--hot-pink);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 9px;
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 6px;
+}
+
+.window-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.window-buttons i {
+    display: block;
+
+    width: 10px;
+    height: 10px;
+
+    background: var(--light-pink);
+
+    border: 2px solid var(--dark);
+}
+
+.window-buttons i:nth-child(2) {
+    background: var(--yellow);
+}
+
+.window-buttons i:nth-child(3) {
+    background: var(--blue);
+}
+
+.completion-content,
+.love-content {
+    padding: 28px 20px;
+
+    text-align: center;
+}
+
+.pixel-trophy {
+    width: 90px;
+    height: 100px;
+
+    margin: 0 auto 18px;
+
+    position: relative;
+}
+
+.trophy-top {
+    position: absolute;
+
+    width: 58px;
+    height: 54px;
+
+    left: 16px;
+    top: 0;
+
+    background: var(--yellow);
+
+    border: 5px solid var(--dark);
+}
+
+.trophy-body {
+    position: absolute;
+
+    width: 72px;
+    height: 25px;
+
+    left: 9px;
+    top: 15px;
+
+    border-left: 8px solid var(--dark);
+    border-right: 8px solid var(--dark);
+}
+
+.trophy-base {
+    position: absolute;
+
+    width: 58px;
+    height: 18px;
+
+    left: 16px;
+    bottom: 0;
+
+    background: var(--hot-pink);
+
+    border: 5px solid var(--dark);
+}
+
+.completion-label,
+.love-label {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 8px;
+
+    color: var(--pink);
+}
+
+.completion-content h1,
+.love-content h1 {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: clamp(18px, 5vw, 30px);
+
+    line-height: 1.35;
+
+    color: var(--deep-pink);
+
+    margin: 12px 0;
+}
+
+.completion-copy {
+    font-size: 23px;
+
+    line-height: 0.95;
+
+    max-width: 450px;
+
+    margin: 0 auto;
+}
+
+.reward-box {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin: 20px 0;
+}
+
+.reward-box div {
+    background: var(--soft-pink);
+
+    border: 4px solid var(--dark);
+
+    padding: 9px;
+}
+
+.reward-box span,
+.reward-box strong {
+    display: block;
+}
+
+.reward-box span {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 6px;
+
+    margin-bottom: 7px;
+}
+
+.reward-box strong {
+    font-size: 20px;
+}
+
+/* =========================
+   LOVE SCREEN
+========================= */
+
+.love-content {
+    padding-top: 22px;
+}
+
+.pixel-flower-large {
+    position: relative;
+
+    width: 90px;
+    height: 100px;
+
+    margin: 0 auto 10px;
+}
+
+.flower-petals {
+    position: absolute;
+    inset: 0;
+}
+
+.flower-petals i {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    background: var(--pink);
+
+    border: 4px solid var(--dark);
+}
+
+.flower-petals i:nth-child(1) {
+    top: 2px;
+    left: 31px;
+}
+
+.flower-petals i:nth-child(2) {
+    top: 25px;
+    left: 9px;
+}
+
+.flower-petals i:nth-child(3) {
+    top: 25px;
+    right: 9px;
+}
+
+.flower-petals i:nth-child(4) {
+    bottom: 27px;
+    left: 18px;
+}
+
+.flower-petals i:nth-child(5) {
+    bottom: 27px;
+    right: 18px;
+}
+
+.flower-petals i:nth-child(6) {
+    top: 29px;
+    left: 31px;
+}
+
+.flower-center {
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    left: 33px;
+    top: 29px;
+
+    background: var(--yellow);
+
+    border: 4px solid var(--dark);
+
+    z-index: 2;
+}
+
+.flower-stem {
+    position: absolute;
+
+    width: 7px;
+    height: 42px;
+
+    background: var(--grass);
+
+    border: 3px solid var(--dark);
+
+    bottom: 0;
+    left: 42px;
+}
+
+.message-box {
+    text-align: left;
+
+    background: #fff8ed;
+
+    border: 4px solid var(--dark);
+
+    padding: 16px;
+
+    margin-top: 18px;
+
+    box-shadow: 5px 5px 0 rgba(36, 27, 53, 0.15);
+}
+
+.message-box p {
+    font-size: 21px;
+
+    line-height: 1.05;
+
+    margin-bottom: 14px;
+}
+
+.message-box p:last-child {
+    margin-bottom: 0;
+}
+
+.final-love {
+    color: var(--hot-pink);
+
+    font-weight: bold;
+}
+
+.signature {
+    margin-top: 17px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.signature span {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 7px;
+
+    color: var(--deep-pink);
+}
+
+.signature strong {
+    font-size: 24px;
+
+    color: var(--pink);
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 200;
+}
+
+.pixel-particle {
+    position: fixed;
+
+    width: 8px;
+    height: 8px;
+
+    background: var(--pink);
+
+    pointer-events: none;
+
+    animation: particleFly 0.8s steps(6) forwards;
+}
+
+.pixel-particle:nth-child(3n) {
+    background: var(--yellow);
+}
+
+.pixel-particle:nth-child(3n + 1) {
+    background: var(--light-pink);
+}
+
+.pixel-particle:nth-child(3n + 2) {
+    background: var(--hot-pink);
+}
+
+@keyframes particleFly {
+    from {
+        opacity: 1;
+
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            rotate(180deg);
+    }
+}
+
+/* =========================
+   SCREEN FLASH
+========================= */
+
+#screenFlash {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 150;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background: white;
+}
+
+#screenFlash.flash {
+    animation: flash 0.3s steps(2);
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+    .game-header {
+        margin-top: 12px;
+    }
+
+    .title-small {
+        font-size: 6px;
+    }
+
+    .title-main {
+        font-size: 20px;
+    }
+
+    .level-box {
+        padding: 7px;
+        font-size: 7px;
+    }
+
+    .game-world {
+        margin-top: 10px;
+    }
+
+    .character-area {
+        height: 245px;
+    }
+
+    .puppy {
+        transform: scale(0.84);
+        transform-origin: bottom center;
+    }
+
+    .speech-box {
+        top: 8px;
+
+        left: auto;
+        right: 0;
+
+        transform: none;
+
+        width: 58%;
+
+        padding: 9px;
+    }
+
+    .speech-name {
+        font-size: 5px;
+        padding: 3px 4px;
+    }
+
+    .speech-box p {
+        font-size: 18px;
+    }
+
+    .ground {
+        height: 120px;
+    }
+
+    .quest-card h2 {
+        font-size: 11px;
+    }
+
+    .quest-card p {
+        font-size: 18px;
+    }
+
+    .pixel-button {
+        min-height: 56px;
+    }
+
+    .completion-content,
+    .love-content {
+        padding: 22px 13px;
+    }
+
+    .completion-copy {
+        font-size: 20px;
+    }
+
+    .message-box p {
+        font-size: 19px;
+    }
+
+    .window-bar {
+        font-size: 5px;
+    }
+}
+
+@media (max-width: 380px) {
+    .hud {
+        grid-template-columns: 1fr;
+    }
+
+    .character-area {
+        height: 225px;
+    }
+
+    .speech-box {
+        width: 62%;
+    }
+
+    .speech-box p {
+        font-size: 16px;
+    }
+
+    .quest-card p {
+        font-size: 17px;
+    }
+
+    .reward-box strong {
+        font-size: 17px;
+    }
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================
+   PUPPY NAME SCREEN
+========================= */
+
+.name-screen {
+    z-index: 300;
+}
+
+.name-window {
+    width: min(520px, 100%);
+
+    background: var(--cream);
+
+    border: 6px solid var(--dark);
+
+    box-shadow:
+        12px 12px 0 rgba(36, 27, 53, 0.3),
+        inset 0 0 0 4px var(--light-pink);
+}
+
+.name-content {
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+.name-label {
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 7px;
+
+    color: var(--deep-pink);
+
+    margin-bottom: 12px;
+}
+
+.name-content h1 {
+    font-family: 'Press Start 2P', monospace;
+
+    color: var(--deep-pink);
+
+    font-size: clamp(20px, 6vw, 32px);
+
+    margin-bottom: 14px;
+}
+
+.name-content > p {
+    font-size: 23px;
+
+    line-height: 0.95;
+}
+
+.name-question {
+    color: var(--hot-pink);
+
+    margin-top: 12px;
+
+    font-weight: bold;
+}
+
+#puppyNameInput {
+    display: block;
+
+    width: 100%;
+    height: 58px;
+
+    margin-top: 18px;
+
+    padding: 10px;
+
+    border: 5px solid var(--dark);
+
+    outline: none;
+
+    background: white;
+
+    color: var(--dark);
+
+    font-family: 'VT323', monospace;
+
+    font-size: 27px;
+
+    text-align: center;
+
+    box-shadow:
+        5px 5px 0 rgba(36, 27, 53, 0.2);
+}
+
+#puppyNameInput:focus {
+    background: var(--pale-pink);
+
+    border-color: var(--hot-pink);
+}
+
+#puppyNameInput::placeholder {
+    color: #9b8da8;
+}
+
+.name-error {
+    min-height: 22px;
+
+    margin-top: 10px;
+
+    color: var(--hot-pink);
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 6px;
+}
+
+/* =========================
+   LITTLE PIXEL DOG
+========================= */
+
+.tiny-pixel-dog {
+    position: relative;
+
+    width: 80px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    background: #f7a96b;
+
+    border: 5px solid var(--dark);
+}
+
+.tiny-dog-ear {
+    position: absolute;
+
+    width: 24px;
+    height: 35px;
+
+    top: -15px;
+
+    background: #c96751;
+
+    border: 4px solid var(--dark);
+}
+
+.tiny-dog-ear.left {
+    left: -8px;
+}
+
+.tiny-dog-ear.right {
+    right: -8px;
+}
+
+.tiny-dog-face {
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    top: 22px;
+
+    height: 18px;
+}
+
+.tiny-dog-face span {
+    position: absolute;
+
+    width: 7px;
+    height: 9px;
+
+    background: var(--dark);
+}
+
+.tiny-dog-face span:first-child {
+    left: 0;
+}
+
+.tiny-dog-face span:last-child {
+    right: 0;
+}
+
+/* =========================
+   EXIT BUTTON
+========================= */
+
+.exit-button {
+    margin-top: 18px;
+
+    width: 100%;
+
+    min-height: 48px;
+
+    border: 4px solid var(--dark);
+
+    background: transparent;
+
+    color: var(--deep-pink);
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 8px;
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 rgba(36, 27, 53, 0.18);
+
+    transition:
+        transform 0.08s,
+        background 0.1s;
+}
+
+.exit-button:hover {
+    background: var(--soft-pink);
+}
+
+.exit-button:active {
+    transform: translate(3px, 3px);
+
+    box-shadow:
+        1px 1px 0 rgba(36, 27, 53, 0.18);
+}
+
+/* =========================
+   MOBILE NAME SCREEN
+========================= */
+
+@media (max-width: 600px) {
+    .name-content {
+        padding: 24px 15px;
+    }
+
+    .name-content > p {
+        font-size: 20px;
+    }
+
+    #puppyNameInput {
+        font-size: 24px;
+    }
+}

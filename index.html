@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Quest-for Zee</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="game">
+
+        <!-- BACKGROUND -->
+
+        <div class="sky">
+            <div class="pixel-sun"></div>
+
+            <div class="cloud cloud-one"></div>
+            <div class="cloud cloud-two"></div>
+
+            <div class="stars">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mountains">
+            <div class="mountain mountain-one"></div>
+            <div class="mountain mountain-two"></div>
+            <div class="mountain mountain-three"></div>
+        </div>
+
+
+        <!-- GAME HEADER -->
+
+        <header class="game-header">
+
+            <div class="header-top">
+
+                <div class="game-title">
+                    <span class="title-small">Special Zee</span>
+                    <span class="title-main">QUEST</span>
+                </div>
+
+                <div class="level-box">
+                    <span>LV</span>
+                    <strong id="level">01</strong>
+                </div>
+
+            </div>
+
+            <div class="hud">
+
+                <div class="hud-block">
+
+                    <span class="hud-label">
+                        MOOD
+                    </span>
+
+                    <div class="heart-meter">
+                        <div id="moodFill"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="hud-block progress-block">
+
+                    <span class="hud-label">
+                        QUEST
+                    </span>
+
+                    <div class="quest-progress">
+                        <div id="questFill"></div>
+                    </div>
+
+                    <span id="questText">
+                        0 / 10
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN GAME -->
+
+        <main class="game-world">
+
+            <div
+                class="pixel-message"
+                id="topMessage"
+            >
+                WASSUPPP :)!
+            </div>
+
+
+            <!-- CHARACTER -->
+
+            <section class="character-area">
+
+                <div class="character-shadow"></div>
+
+
+                <div
+                    class="puppy"
+                    id="puppy"
+                >
+
+                    <div class="tail"></div>
+
+                    <div class="body">
+
+                        <div class="leg leg-back"></div>
+                        <div class="leg leg-front"></div>
+
+                    </div>
+
+
+                    <div class="head">
+
+                      <div class="collar">
+                        <div class="collar-tag"></div>
+                         </div>
+
+                        <div class="ear ear-left"></div>
+                        <div class="ear ear-right"></div>
+
+
+                        <div class="face">
+
+                            <div class="eye eye-left">
+                                <span></span>
+                            </div>
+
+                            <div class="eye eye-right">
+                                <span></span>
+                            </div>
+
+                            <div class="snout"></div>
+
+                            <div class="nose"></div>
+
+                            <div class="mouth">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SPEECH -->
+
+                <div
+                    class="speech-box"
+                    id="speechBox"
+                >
+
+                    <div
+                        class="speech-name"
+                        id="speechName"
+                    >
+                        PUPPY.EXE
+                    </div>
+
+                    <p id="speech">
+                        SUP human babe, you seem moody today
+                    </p>
+
+                    <div class="speech-arrow"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WORLD -->
+
+            <section class="ground">
+
+                <div class="grass-layer"></div>
+
+                <div
+                    class="flower-field"
+                    id="flowerField"
+                ></div>
+
+                <div class="rocks">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+                <div class="ground-decoration decoration-one"></div>
+                <div class="ground-decoration decoration-two"></div>
+
+            </section>
+
+
+            <!-- ACTION PANEL -->
+
+            <section class="control-panel">
+
+                <div class="quest-card">
+
+                    <div class="quest-card-top">
+
+                        <span class="quest-tag">
+                            CURRENT QUEST
+                        </span>
+
+                        <span id="questNumber">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <h2 id="questTitle">
+                        DEPLOY THE PUPPY
+                    </h2>
+
+
+                    <p id="questDescription">
+                        ask puppy bro to help you out :)
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="actionButton"
+                    class="pixel-button"
+                >
+
+                    <span class="button-icon"></span>
+
+                    <span id="buttonText">
+                        START QUEST
+                    </span>
+
+                </button>
+
+
+                <div
+                    class="tiny-status"
+                    id="statusText"
+                >
+                    SYSTEM STATUS: READY
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- COMPLETION SCREEN -->
+
+        <section
+            class="screen completion-screen"
+            id="completionScreen"
+        >
+
+            <div class="completion-stars">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <div class="completion-window">
+
+                <div class="window-bar">
+
+                    <span>
+                        MOOD_RECOVERY.EXE
+                    </span>
+
+                    <div class="window-buttons">
+
+                        <i></i>
+                        <i></i>
+                        <i></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="completion-content">
+
+                    <div class="pixel-trophy">
+
+                        <div class="trophy-top"></div>
+                        <div class="trophy-body"></div>
+                        <div class="trophy-base"></div>
+
+                    </div>
+
+
+                    <p class="completion-label">
+                        QUEST COMPLETE
+                    </p>
+
+
+                    <h1>
+                        MOOD RESTORED
+                    </h1>
+
+
+                    <p class="completion-copy">
+                        The puppy has successfully completed
+                        its extremely important mission.
+                    </p>
+
+
+                    <div class="reward-box">
+
+                        <div>
+
+                            <span>
+                                REWARD
+                            </span>
+
+                            <strong>
+                                FLOWERS + LOVE
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                XP
+                            </span>
+
+                            <strong>
+                                +999
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="claimButton"
+                        class="pixel-button pink-button"
+                    >
+                        OPEN FINAL MESSAGE
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOVE SCREEN -->
+
+        <section
+            class="screen love-screen"
+            id="loveScreen"
+        >
+
+            <div class="love-window">
+
+                <div class="window-bar">
+
+                    <span>
+                        MESSAGE_FROM_YOUR_PERSON.TXT
+                    </span>
+
+                    <div class="window-buttons">
+
+                        <i></i>
+                        <i></i>
+                        <i></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="love-content">
+
+                    <div class="pixel-flower-large">
+
+                        <div class="flower-petals">
+
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+
+                        </div>
+
+                        <div class="flower-center"></div>
+
+                        <div class="flower-stem"></div>
+
+                    </div>
+
+
+                    <div class="love-label">
+                        FINAL MESSAGE
+                    </div>
+
+
+                    <h1>
+                        FOR MY LOVE
+                    </h1>
+
+
+                    <div class="message-box">
+
+                        <p>
+                            Hi my love.
+                        </p>
+
+                        <p>
+                            I know you're a little moody right now,
+                            so I made you this stupid little game
+                            instead of bothering you.
+                        </p>
+
+                        <p>
+                            You are still very loved.
+                            Even when you're grumpy.
+                            Even when you're annoying.
+                            Even when you feel like hiding from
+                            the world.
+                        </p>
+
+                        <p>
+                            I hope this made you smile,
+                            even if it was just a little.
+                        </p>
+
+                        <p>
+                            Until I can give you the real flowers,
+                            these ones will have to do.
+                        </p>
+
+                        <p class="final-love">
+                            Love you, always.
+                        </p>
+
+                    </div>
+
+
+                    <div class="signature">
+
+                        <span>
+                            GAME OVER
+                        </span>
+
+                        <strong>
+                            but never us.
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="exitButton"
+                        class="exit-button"
+                    >
+                        EXIT QUEST
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAME SCREEN -->
+
+        <section
+            class="screen name-screen active"
+            id="nameScreen"
+        >
+
+            <div class="name-window">
+
+                <div class="window-bar">
+
+                    <span>
+                        NEW_GAME.EXE
+                    </span>
+
+                    <div class="window-buttons">
+
+                        <i></i>
+                        <i></i>
+                        <i></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="name-content">
+
+                    <div class="tiny-pixel-dog">
+
+                        <div class="tiny-dog-ear left"></div>
+                        <div class="tiny-dog-ear right"></div>
+
+                        <div class="tiny-dog-face">
+
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="name-label">
+                        NEW QUEST
+                    </div>
+
+
+                    <h1>
+                        WAITTT
+                    </h1>
+
+
+                    <p>
+                        before we start i need one very important thing
+                    </p>
+
+
+                    <p class="name-question">
+                        what are we naming this puppy?
+                    </p>
+
+
+                    <input
+                        id="puppyNameInput"
+                        type="text"
+                        maxlength="14"
+                        autocomplete="off"
+                        placeholder="type a name..."
+                    >
+
+
+                    <button
+                        id="nameButton"
+                        class="pixel-button"
+                    >
+                        THATS HER NAME
+                    </button>
+
+
+                    <div
+                        class="name-error"
+                        id="nameError"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SCREEN FLASH -->
+
+        <div id="screenFlash"></div>
+
+
+        <!-- PIXEL PARTICLES -->
+
+        <div id="particles"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
